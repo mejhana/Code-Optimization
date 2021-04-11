@@ -14,6 +14,7 @@ def main():
 	ifs = ["if", "elif" ,"else"]
 	start_loop,end_loop,start_if,end_if = Parsing(file,loop,ifs) 
 	print(start_loop,end_loop,start_if,end_if)
+
 	# for loop tilling 
 	for i in range(len(start_loop)):
 		#optimising all loops in reverse
@@ -28,9 +29,22 @@ def main():
 		#optimising all loops in reverse
 		line  = file[start_loop[-i]-1].split()
 		deadcode(line)
+
 	#for loop unrolling
+	#for all loops in file! 
+	variable_list = []
+	for i in range(len(start_loop)):
+		#get all variables inside loop!
+		lines = []
+		for j in range(start_loop[-i],end_loop[-i]-2):
+			lines.append(file[j].split())
+		var = get_var(lines)
+		if not(var in variable_list):
+			variable_list.append(var)
+
+	print("All the variables are - " + str(variable_list))
 	Line = "array(i+1, k-2) = array(i+0, k-2) + array(i+1, k-2) - array(i+3, k-256877845);"
-    print(unroll(unroll(Line, "k", 4), "i", 3, False))
+	print(unroll(unroll(Line, "k", 4), "i", 3, False))
 
 if __name__ == "__main__":
     main()

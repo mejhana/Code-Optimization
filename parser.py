@@ -4,7 +4,7 @@ def tag_words(word):
 	identifier = re.compile(r"^[^\d\W]\w*\Z", re.UNICODE)
 	digits = re.compile(r"([0-9]+(?:\.[0-9]+)?)")
 	tag = ""
-	keywords = ["for", "in", "range" ,"while" ,"if", "elif" ,"else"]
+	keywords = ["for", "in", "range" ,"while" ,"if", "elif" ,"else","continue","break"]
 	if word in keywords:
 		tag = "keyword"
 	elif re.match(identifier, word):   
@@ -12,6 +12,16 @@ def tag_words(word):
 	elif re.match(digits ,word):
 		tag = "number"
 	return tag
+
+def get_var(lines):
+	var = []
+	for line in lines:
+		for word in line:
+			tag = tag_words(word)
+			#append word to var if it is an identifer and not already present in var
+			if tag == "identifier" and not(word in var):
+				var.append(word)
+	return var
 
 def Parsing(file, loop_keyword, ifs_keyword):
 	in_loop = False
