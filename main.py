@@ -9,11 +9,12 @@ def main():
 	#filename = input("Enter your file path with filename and extension")
 	filename = "sample_code.py"
 	file = open(filename, "r").readlines()
+
 	#get starts and ends of loops and also run code for deadcode! 
-	loop = ["for", "while"]
-	ifs = ["if", "elif" ,"else"]
-	start_loop,end_loop,start_if,end_if = Parsing(file,loop,ifs) 
+	start_loop,end_loop,start_if,end_if = Parsing(file) 
 	print(start_loop,end_loop,start_if,end_if)
+
+	#choice = input("Enter \n0 for Deadcode elimination \n1 for Loop Tilling \n2 for Code Motion \n3 for Loop Unrolling")
 
 	# for loop tilling 
 	for i in range(len(start_loop)):
@@ -43,7 +44,7 @@ def main():
 			variable_list.append(var)
 
 	print("All the variables are - " + str(variable_list))
-	
+
 	Line = "array(i+1, k-2) = array(i+0, k-2) + array(i+1, k-2) - array(i+3, k-256877845);"
 	print(unroll(unroll(Line, "k", 4), "i", 3, False))
 

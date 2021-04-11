@@ -23,7 +23,9 @@ def get_var(lines):
 				var.append(word)
 	return var
 
-def Parsing(file, loop_keyword, ifs_keyword):
+def Parsing(file):
+	loop_keyword = ["for", "while"]
+	ifs_keyword = ["if", "elif" ,"else"]
 	in_loop = False
 	line_number = 0
 	block = 0
