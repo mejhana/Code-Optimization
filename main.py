@@ -28,6 +28,9 @@ def main():
 		#optimising all loops in reverse
 		line  = file[start_loop[-i]-1].split()
 		deadcode(line)
+	#for loop unrolling
+	Line = "array(i+1, k-2) = array(i+0, k-2) + array(i+1, k-2) - array(i+3, k-256877845);"
+        print(unroll(unroll(Line, "k", 4), "i", 3, False))
 
 if __name__ == "__main__":
     main()
