@@ -1,4 +1,4 @@
-from parser import *
+from Parser import *
 
 def loop_tilling(line,block_size):
 	print("performing loop tilling\n")

@@ -1,4 +1,4 @@
-from parser import *
+from Parser import *
 
 def deadcode(line):
 	print("performing dead code elination")

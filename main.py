@@ -1,4 +1,4 @@
-from parser import *
+from Parser import *
 from Deadcode_Removal import *
 from Loop_Tilling import *
 from Loop_Unrolling import *
@@ -12,7 +12,7 @@ def main():
 	#get starts and ends of loops and also run code for deadcode! 
 	loop = ["for", "while"]
 	ifs = ["if", "elif" ,"else"]
-	start_loop,end_loop,start_if,end_if = scanning(file,loop,ifs) 
+	start_loop,end_loop,start_if,end_if = Parsing(file,loop,ifs) 
 	print(start_loop,end_loop,start_if,end_if)
 	# for loop tilling 
 	for i in range(len(start_loop)):

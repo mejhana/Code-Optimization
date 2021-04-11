@@ -13,7 +13,7 @@ def tag_words(word):
 		tag = "number"
 	return tag
 
-def scanning(file, loop_keyword, ifs_keyword):
+def Parsing(file, loop_keyword, ifs_keyword):
 	in_loop = False
 	line_number = 0
 	block = 0
