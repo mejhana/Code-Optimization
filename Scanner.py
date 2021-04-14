@@ -1,0 +1,1 @@
+def scanning(file):

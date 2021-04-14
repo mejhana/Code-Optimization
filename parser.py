@@ -39,9 +39,8 @@ def Parsing(file):
 	all_starts =[]
 	
 	for line in file:
-		line_number +=1
 		if line.startswith(tabs):
-			for word in line.split():
+			for word in re.split(r'(\[|\]|\(|\)|;|,|\s)\s*', line):
 				#increment line number with each line
 				if word in loop_keyword:
 					tabs = tabs + '  '
@@ -53,17 +52,18 @@ def Parsing(file):
 					start_if.append(line_number)
 					all_starts.append(word)
 					block +=1
-		else: 
+			line_number +=1	
+		elif not (block == 0):
 			#decrementing the tabs_loop for nested loops
-			if not (block == 0):
-				tabs.replace('  ', '')
-				if all_starts[block-1] in loop_keyword:
-					end_loop.append(line_number)
-					block -=1
-					
-				else:
-					end_if.append(line_number)	
-					block -=1
+			tabs.replace('  ', '')
+			if all_starts[block-1] in loop_keyword:
+				end_loop.append(line_number)
+				block -=1	
+						
+			else:
+				end_if.append(line_number)	
+				block -=1
+			
 	#condition where more than 2 blocks end in same line
 	if all_starts[block-1] in loop_keyword and not(block == 0):
 		end_loop.append(line_number)
@@ -72,6 +72,9 @@ def Parsing(file):
 	elif not(block == 0):
 		end_if.append(line_number)	
 		block -=1		
-	print("number of lines in this code is " +str(line_number))				
+	print("number of lines in this code is " +str(line_number))	
+
+	while(len(end_loop)<len(start_loop)):
+		end_loop.append(line_number)			
 
 	return start_loop,end_loop,start_if,end_if
