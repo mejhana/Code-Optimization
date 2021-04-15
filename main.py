@@ -53,18 +53,30 @@ def til_loop(input_filename,output_filename):
 
 
 def vect(input_filename,output_filename):
-	print("Shruthi do this lol")
+	#for loop vectorization
+	block_size = int(input("\nEnter Block Size - "))
+	#reading the file to optimise
+	sample_file = read(input_filename)
+
+	#get starts and ends of loops and if blocks
+	start_loop,end_loop,start_if,end_if = Parsing(sample_file) 
+	print(start_loop,end_loop,start_if,end_if)
+
+	# for loop vectorization
+	code = vectorize(sample_file,start_loop,end_loop,block_size)
+	# write back into a new file! 
+	write(code, output_filename)
 
 	#checking performance by executing files
 	tic = time.time()
 	execfile(input_filename)
 	toc = time.time()
-	print("Time taken BEFORE Loop Tiling - "+ str(1000*(toc-tic))+"ms")
+	print("Time taken BEFORE Loop Vectorization - "+ str(1000*(toc-tic))+"ms")
 
 	tic = time.time()
 	execfile(output_filename)
 	toc = time.time()
-	print("Time taken AFTER Loop Tiling - "+ str(1000*(toc-tic))+"ms")
+	print("Time taken AFTER Loop Vectorization - "+ str(1000*(toc-tic))+"ms")
 	
 def main():
 	#choice = int(input("Enter \n0 for Deadcode elimination \n1 for Loop Tilling \n2 for Loop Vectorization \n3 for Loop Unrolling"))
@@ -80,8 +92,9 @@ def main():
 		#vectorization
 		input_filename = "sample_vector.py"
 		output_filename = "after_loop_vectorization.py"
-		vect(input_filename,output_filename)
 		print("Performing vectorization")
+		vect(input_filename,output_filename)
+		
 	elif choice == 3:
 		#Loop Unrolling
 		input_filename = "sample_unroll.py"
