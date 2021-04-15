@@ -10,7 +10,6 @@ from loop_vectorization import *
 from Loop_Unrolling import *
 from Loop_Tiling import *
 
-
 def write(code, new_file_path):
 	#write code into file 
 	f = open(new_file_path, "w")
@@ -27,12 +26,12 @@ def check_performance(text,input_filename,output_filename):
 	tic = time.time()
 	execfile(input_filename)
 	toc = time.time()
-	print("Time taken BEFORE " + text +  "- "+ str(1000*(toc-tic))+"ms")
+	print("\nTime taken BEFORE " + text +  "- "+ str(1000*(toc-tic))+"ms")
 
 	tic = time.time()
 	execfile(output_filename)
 	toc = time.time()
-	print("Time taken AFTER " + text +  "- "+ str(1000*(toc-tic))+"ms")
+	print("\nTime taken AFTER " + text +  "- "+ str(1000*(toc-tic))+"ms")
 
 
 def til_loop(input_filename,output_filename):
@@ -98,13 +97,15 @@ def main():
 		#vectorization
 		input_filename = "sample_inputs\sample_vector.py"
 		output_filename = "sample_outputs\output_loop_vectorization.py"
-		vect(input_filename,output_filename)
 		print("Performing vectorization")
+		vect(input_filename,output_filename)
+		
 	elif choice == 3:
 		#Loop Unrolling
 		input_filename = "sample_inputs\sample_unroll.py"
 		output_filename = "sample_outputs\output_loop_unroll.py"
 		print("Performing Loop Unrolling")
+		unrolling(input_filename,output_filename)
 
 
 
