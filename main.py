@@ -97,8 +97,6 @@ def unrolling(input_filename,output_filename):
 
 def main():
 	choice = int(input("Enter \n1 for Loop Tilling \n2 for Loop Vectorization \n3 for Loop Unrolling"))
-	#input_filename = input("Enter your input file path with filename and extension")
-	#output_filename = input("Enter your output file path with filename and extension")
 	if choice == 1:
 		input_filename = "sample_inputs\sample_tiling.py"
 		output_filename = "sample_outputs\output_loop_tiling.py"
