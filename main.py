@@ -53,18 +53,16 @@ def til_loop(input_filename,output_filename):
 	check_performance(text,input_filename,output_filename)
 
 def vect(input_filename,output_filename):
-	print("Shruthi do this lol")
 	#reading the file to optimise
 	input_file = read(input_filename)
 
 	#get starts and ends of loops and if blocks
 	start_loop,end_loop,start_if,end_if = Parsing(input_file) 
 	print(start_loop,end_loop,start_if,end_if)
-
 	#code = performing vectorization or something 
+	code = vectorize.vectorized_function()
 	# write back into a new file! 
-	#write(code, output_filename)
-
+	write(code, output_filename)
 	#check performance 
 	text = "Loop Vectorization"
 	check_performance(text,input_filename,output_filename)
