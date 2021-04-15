@@ -1,5 +1,16 @@
 import re
 
+def replace_var(line, new_var, old_var):
+	sep = re.split(r'(\[|\]|\(|\)|;|,|\s)\s*', line)
+	var = get_var(sep)
+	for v in var:
+		for n,o in zip(new_var,old_var):
+			if v == o:
+				print("true")
+				line = line.replace(v,n)
+	print(line)
+	return line
+
 def tag_words(word):
 	identifier = re.compile(r"^[^\d\W]\w*\Z", re.UNICODE)
 	digits = re.compile(r"([0-9]+(?:\.[0-9]+)?)")
@@ -13,14 +24,13 @@ def tag_words(word):
 		tag = "number"
 	return tag
 
-def get_var(lines):
+def get_var(line):
 	var = []
-	for line in lines:
-		for word in line:
-			tag = tag_words(word)
-			#append word to var if it is an identifer and not already present in var
-			if tag == "identifier" and not(word in var):
-				var.append(word)
+	for word in line:
+		tag = tag_words(word)
+		#append word to var if it is an identifer and not already present in var
+		if tag == "identifier" and not(word in var):
+			var.append(word)
 	return var
 
 def Parsing(file):

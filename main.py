@@ -3,9 +3,11 @@ from Loop_Tiling import *
 from Loop_Unrolling import *
 from loop_vectorization import *
 from shutil import copyfile
+import fileinput
+import numpy as np
+import time 
 import re 
 import os
-import fileinput
 
 def write(code, new_file_path):
 	#write code into file 
@@ -35,6 +37,29 @@ def main():
 	code = perform_loop_tilling(sample_file,start_loop,end_loop,block_size)
 	# write back into a new file! 
 	write(code, tilling_file)
+
+	# for loop vectorization
+	a = np.random.rand(1000000)
+	b = np.random.rand(1000000)
+
+	tic = time.time()
+	c = np.dot(a,b)
+	toc = time.time()
+
+	print(c)
+	print("Vectorization version:"+ str(1000*(toc-tic))+"ms")
+
+
+	c=0
+	tic = time.time()
+	for i in range(1000000):
+		c+= a[i]*b[i]
+	toc = time.time()
+
+	print(c)
+	print("for Loop:"+ str(1000*(toc-tic))+"ms")
+
+
 
 	# for deadcode 
 	'''

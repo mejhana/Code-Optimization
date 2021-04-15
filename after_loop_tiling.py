@@ -14,11 +14,12 @@ x = len(A)
 y = len(B[0])
 z = len(B)
 
-for i in range(0,2,x):
-    for var16 in range(i,min(x,x+2)):
-        for j in range(0,2,y):
-            for var17 in range(j,min(y,y+2)):
-                for k in range(0,2,z):
-                    for var18 in range(k,min(z,z+2)):
-                        result[i][j] += A[i][k] * B[k][j]
+for i in range(0,2,x): 
+    for j in range(0,2,y): 
+        for k in range(0,2,z): 
+            for var16 in range(i,min(x,x+2)): 
+                for var17 in range(j,min(y,y+2)): 
+                    for var18 in range(k,min(z,z+2)): 
+                        result[var16][var17] += A[var16][var18] * B[var18][var17]
+
 print(result)
