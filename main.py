@@ -1,13 +1,18 @@
-from Deadcode_Removal import *
-from Loop_Tiling import *
-from Loop_Unrolling import *
-from loop_vectorization import *
+from past.builtins.misc import execfile
 from shutil import copyfile
-import fileinput
 import numpy as np
+import fileinput
 import time 
 import re 
 import os
+
+#Userdefined Functions
+
+from loop_vectorization import *
+from Deadcode_Removal import *
+from Loop_Unrolling import *
+from Loop_Tiling import *
+
 
 def write(code, new_file_path):
 	#write code into file 
@@ -16,28 +21,39 @@ def write(code, new_file_path):
 	f.write(code)
 	f.close()
 
+def read(filename):
+	code = open(filename, "r").readlines()
+	return code
 
-def main():
-	block_size = 2
-	#filename = input("Enter your file path with filename and extension")
-	#sample_code
-	filename = "sample_code.py"
-	#write back for tiling
-	tilling_file = "after_loop_tiling.py"
+def til_loop(input_filename,output_filename):
+	block_size = int(input("\nEnter Block Size - "))
+	#reading the file to optimise
+	sample_file = read(input_filename)
 
-	sample_file = open(filename, "r").readlines()
-
-	#get starts and ends of loops and also run code for deadcode! 
+	#get starts and ends of loops and if blocks
 	start_loop,end_loop,start_if,end_if = Parsing(sample_file) 
 	print(start_loop,end_loop,start_if,end_if)
-
-	#choice = input("Enter \n0 for Deadcode elimination \n1 for Loop Tilling \n2 for Code Motion \n3 for Loop Unrolling")
 
 	# for loop tilling 
 	code = perform_loop_tilling(sample_file,start_loop,end_loop,block_size)
 	# write back into a new file! 
-	write(code, tilling_file)
+	write(code, output_filename)
 
+	#checking performance by executing files
+	tic = time.time()
+	execfile(input_filename)
+	toc = time.time()
+	print("Time taken BEFORE Loop Tiling - "+ str(1000*(toc-tic))+"ms")
+
+	tic = time.time()
+	execfile(output_filename)
+	toc = time.time()
+	print("Time taken AFTER Loop Tiling - "+ str(1000*(toc-tic))+"ms")
+
+
+
+def vect(input,output):
+	print("Shruthi do this lol")
 	# for loop vectorization
 	a = np.random.rand(1000000)
 	b = np.random.rand(1000000)
@@ -58,6 +74,31 @@ def main():
 
 	print(c)
 	print("for Loop:"+ str(1000*(toc-tic))+"ms")
+
+
+
+def main():
+	#choice = int(input("Enter \n0 for Deadcode elimination \n1 for Loop Tilling \n2 for Loop Vectorization \n3 for Loop Unrolling"))
+	#input_filename = input("Enter your input file path with filename and extension")
+	#output_filename = input("Enter your output file path with filename and extension")
+	choice = 1
+	if choice == 1:
+		input_filename = "sample_code.py"
+		output_filename = "after_loop_tiling.py"
+		print("Performing Loop Tilling")
+		til_loop(input_filename,output_filename)
+	elif choice == 2:
+		#vectorization
+		vect(input_filename,output_filename)
+		print("Performing vectorization")
+	elif choice == 3:
+		#Loop Unrolling
+		print("Performing Loop Unrolling")
+
+
+
+
+
 
 
 

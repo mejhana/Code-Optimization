@@ -6,9 +6,7 @@ def replace_var(line, new_var, old_var):
 	for v in var:
 		for n,o in zip(new_var,old_var):
 			if v == o:
-				print("true")
 				line = line.replace(v,n)
-	print(line)
 	return line
 
 def tag_words(word):
@@ -82,7 +80,6 @@ def Parsing(file):
 	elif not(block == 0):
 		end_if.append(line_number)	
 		block -=1		
-	print("number of lines in this code is " +str(line_number))	
 
 	while(len(end_loop)<len(start_loop)):
 		end_loop.append(line_number)			

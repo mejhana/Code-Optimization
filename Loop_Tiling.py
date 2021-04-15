@@ -1,19 +1,15 @@
 from Parser import *
 import numpy as np
 
-
-
 def loop_tilling(line,block_size,new_var):
 	new_loop = " "
 	daughter_loop = " "
-	print("\nperforming loop tilling")
 	variables = []
 	#retrieve the variables used! 
 	for word in line:
 		tag = tag_words(word)
 		if tag == "identifier" or tag == "number":
 			variables.append(word)
-	print(variables)
 	if len(variables) == 4:
 		mid = str(variables[2]) + "+" + str(block_size)
 		last = "min(" + str(variables[3]) + "," + str(variables[3]) + "+" + str(block_size) + ")"
