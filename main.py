@@ -52,31 +52,20 @@ def til_loop(input_filename,output_filename):
 
 
 
-def vect(input,output):
+def vect(input_filename,output_filename):
 	print("Shruthi do this lol")
-	# for loop vectorization
-	a = np.random.rand(1000000)
-	b = np.random.rand(1000000)
+
+	#checking performance by executing files
+	tic = time.time()
+	execfile(input_filename)
+	toc = time.time()
+	print("Time taken BEFORE Loop Tiling - "+ str(1000*(toc-tic))+"ms")
 
 	tic = time.time()
-	c = np.dot(a,b)
+	execfile(output_filename)
 	toc = time.time()
-
-	print(c)
-	print("Vectorization version:"+ str(1000*(toc-tic))+"ms")
-
-
-	c=0
-	tic = time.time()
-	for i in range(1000000):
-		c+= a[i]*b[i]
-	toc = time.time()
-
-	print(c)
-	print("for Loop:"+ str(1000*(toc-tic))+"ms")
-
-
-
+	print("Time taken AFTER Loop Tiling - "+ str(1000*(toc-tic))+"ms")
+	
 def main():
 	#choice = int(input("Enter \n0 for Deadcode elimination \n1 for Loop Tilling \n2 for Loop Vectorization \n3 for Loop Unrolling"))
 	#input_filename = input("Enter your input file path with filename and extension")
@@ -89,10 +78,14 @@ def main():
 		til_loop(input_filename,output_filename)
 	elif choice == 2:
 		#vectorization
+		input_filename = "sample_vector.py"
+		output_filename = "after_loop_vectorization.py"
 		vect(input_filename,output_filename)
 		print("Performing vectorization")
 	elif choice == 3:
 		#Loop Unrolling
+		input_filename = "sample_unroll.py"
+		output_filename = "after_loop_unroll.py"
 		print("Performing Loop Unrolling")
 
 
