@@ -1,7 +1,5 @@
 from past.builtins.misc import execfile
-from shutil import copyfile
 import numpy as np
-import fileinput
 import time 
 import re 
 import os
@@ -9,7 +7,6 @@ import os
 #Userdefined Functions
 
 from loop_vectorization import *
-from Deadcode_Removal import *
 from Loop_Unrolling import *
 from Loop_Tiling import *
 
