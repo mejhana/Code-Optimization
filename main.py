@@ -1,21 +1,27 @@
 from Deadcode_Removal import *
-from Loop_Tilling import *
+from Loop_Tiling import *
 from Loop_Unrolling import *
+from loop_vectorization import *
 from shutil import copyfile
 import re 
 import os
 import fileinput
 
-def write(filepath, data):
-	with open(filepath, 'w') as fp:
-		pass
+def write(code, new_file_path):
+	#write code into file 
+	f = open(new_file_path, "w")
+	code = "".join(code)
+	f.write(code)
+	f.close()
 
 
 def main():
 	block_size = 2
 	#filename = input("Enter your file path with filename and extension")
+	#sample_code
 	filename = "sample_code.py"
-	tilling_file = "after_loop_tilling.py"
+	#write back for tiling
+	tilling_file = "after_loop_tiling.py"
 
 	sample_file = open(filename, "r").readlines()
 
@@ -26,7 +32,9 @@ def main():
 	#choice = input("Enter \n0 for Deadcode elimination \n1 for Loop Tilling \n2 for Code Motion \n3 for Loop Unrolling")
 
 	# for loop tilling 
-	perform_loop_tilling(sample_file,start_loop,end_loop,block_size,tilling_file)
+	code = perform_loop_tilling(sample_file,start_loop,end_loop,block_size)
+	# write back into a new file! 
+	write(code, tilling_file)
 
 	# for deadcode 
 	'''

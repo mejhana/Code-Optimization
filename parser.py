@@ -43,13 +43,13 @@ def Parsing(file):
 			for word in re.split(r'(\[|\]|\(|\)|;|,|\s)\s*', line):
 				#increment line number with each line
 				if word in loop_keyword:
-					tabs = tabs + '  '
 					start_loop.append(line_number)
+					tabs = tabs + '  '
 					all_starts.append(word)
 					block +=1
 				elif word in ifs_keyword:
-					tabs = tabs + '  '
 					start_if.append(line_number)
+					tabs = tabs + '  '
 					all_starts.append(word)
 					block +=1
 			line_number +=1	

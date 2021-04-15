@@ -15,10 +15,7 @@ y = len(B[0])
 z = len(B)
 
 for i in range(0,x):
-    print(i)
     for j in range(0,y):
-        print(j)
         for k in range(0,z):
-            print(k)
             result[i][j] += A[i][k] * B[k][j]
 print(result)
