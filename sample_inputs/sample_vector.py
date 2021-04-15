@@ -1,13 +1,31 @@
 import numpy as np
+n = 3
+def dotProduct(vect_A, vect_B):
+    product = 0
+    #dot product
+    for i in range(0, n):
+        product = product + vect_A[i] * vect_B[i]
+  
+    return product
+#cross product
+def crossProduct(vect_A, vect_B, cross_P):
+  
+    cross_P.append(vect_A[1] * vect_B[2] - vect_A[2] * vect_B[1])
+    cross_P.append(vect_A[2] * vect_B[0] - vect_A[0] * vect_B[2])
+    cross_P.append(vect_A[0] * vect_B[1] - vect_A[1] * vect_B[0])
+  
+  
 
-# dot
-vector_a = np.array([[1, 4], [5, 6]])
-vector_b = np.array([[2, 4], [5, 2]])
-product = np.dot(vector_a, vector_b)
-print("Dot Product : \n", product)
+    vect_A = np.random.rand(3)
+    vect_B = np.random.rand(3)
+    cross_P = []
+  
 
-# cross
-x = [[1, 2], [3, 4]]
-y = [[5, 6], [7, 8]]
-result = np.cross(x, y)
-print("Cross Product : \n ",result)
+    print("Dot product:", end =" ")
+    print(dotProduct(vect_A, vect_B))
+    print("Cross product:", end =" ")
+    crossProduct(vect_A, vect_B, cross_P)
+# cross product of two vector array.
+    for i in range(0, n):
+        print(cross_P[i], end =" ")
+  
