@@ -1,6 +1,5 @@
 import numpy as np
 from math import sin as sn
-import matplotlib.pyplot as plt
 import time
 # Number of test points
 N_point  = 1000
