@@ -60,7 +60,7 @@ def vect(input_filename,output_filename):
 	start_loop,end_loop,start_if,end_if = Parsing(input_file) 
 	print(start_loop,end_loop,start_if,end_if)
 	#code = performing vectorization or something 
-	code = myfunc()
+	#need to modify this part 
 	# write back into a new file! 
 	write(code, output_filename)
 	#check performance 
