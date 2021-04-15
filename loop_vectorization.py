@@ -3,7 +3,7 @@ from math import sin as sn
 import time
 # Number of test points
 N_point  = 1000
-# Define a custom function with some if-else loops
+#custom function
 def myfunc(x,y):
     if (x>0.5*y and y<0.3):
         return (sn(x-y))
@@ -13,7 +13,7 @@ def myfunc(x,y):
         return (2*sn(x+2*y))
     else:
         return (sn(y+x))
-# List of stored elements, generated from a Normal distribution
+# List of stored elements
 lst_x = np.random.randn(N_point)
 lst_y = np.random.randn(N_point)
 lst_result = []
