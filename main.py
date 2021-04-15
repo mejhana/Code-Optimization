@@ -67,7 +67,7 @@ def vect(input_filename,output_filename):
 	#write(code, output_filename)
 
 	#check performance 
-	text = "Loop Tiling"
+	text = "Loop Vectorization"
 	check_performance(text,input_filename,output_filename)
 	
 def unrolling(input_filename,output_filename):
@@ -84,7 +84,7 @@ def unrolling(input_filename,output_filename):
 	#write(code, output_filename)
 
 	#check performance 
-	text = "Loop Tiling"
+	text = "Loop Unrolling"
 	check_performance(text,input_filename,output_filename)
 
 def main():
