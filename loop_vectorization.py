@@ -1,75 +1,39 @@
-import functools
-import inspect
-
-
-def partition(l, i=1):
-    return (l[:i], l[i:])
-
-def head(l, i=1):
-    return tuple(l[:i]) + (l[i:], )
-
-def truncate(n):
-    def truncate_n(fn):
-        def truncate_fn(*vargs, **kwargs):
-            vargs, _ = partition(vargs, n)
-            return fn(*vargs, **kwargs)
-        return truncate_fn
-    return truncate_n
-
-def splat(fn):
-    @functools.wraps(fn)
-    def splat_fn(vargs, **kwargs):
-        return fn(*vargs, **kwargs)
-    return splat_fn
-
-
-def unsplat(fn):
-    @functools.wraps(fn)
-    def unsplat_fn(*vargs, **kwargs):
-        return fn(vargs, **kwargs)
-    return unsplat_fn
-
-
-def vectorize(fn):
-    """
-    Allows a function to accept one or more values,
-    but internally deal only with a single item,
-    and returning a list or a single item depending
-    on what is desired.
-    """
-
-    is_method = inspect.ismethod(fn)
-
-    if is_method:
-        fn = functools.partial(fn)
-
-    @functools.wraps(fn)
-    def vectorized_function(*vargs, **kwargs):
-        if is_method:
-            self, values, vargs = head(vargs, 2)
-        else:
-            values, vargs = head(vargs, 1)
-
-        wrap = not isinstance(values, (list, dict))
-        should_unwrap = not kwargs.setdefault('wrap', False)
-        unwrap = wrap and should_unwrap
-        del kwargs['wrap']
-
-        if isinstance(values, dict):
-            keys = values.keys()
-            values = values.values()
-
-        if wrap:
-            values = [values]
-
-        results = [fn(value, *vargs, **kwargs) for value in values]
-
-        if isinstance(values, dict):
-            results = dict(zip(keys, results))
-
-        if unwrap:
-            results = results[0]
-
-        return results
-
-    return vectorized_function
+import numpy as np
+from math import sin as sn
+import time
+# Number of test points
+N_point  = 1000
+#custom function
+def myfunc(x,y):
+    if (x>0.5*y and y<0.3):
+        return (sn(x-y))
+    elif (x<0.5*y):
+        return 0
+    elif (x>0.2*y):
+        return (2*sn(x+2*y))
+    else:
+        return (sn(y+x))
+# List of stored elements
+lst_x = np.random.randn(N_point)
+lst_y = np.random.randn(N_point)
+lst_result = []
+# First for-loop
+t1=time.time()
+for i in range(len(lst_x)):
+    x = lst_x[i]
+    y= lst_y[i]
+    if (x>0.5*y and y<0.3):
+        lst_result.append(sn(x-y))
+    elif (x<0.5*y):
+        lst_result.append(0)
+    elif (x>0.2*y):
+        lst_result.append(2*sn(x+2*y))
+    else:
+        lst_result.append(sn(y+x))
+t2=time.time()
+print("\nTime taken by for loop method\n---------------------------------------\n")
+print(time.time()*1000000) 
+print("micro seconds")
+# Numpy.vectorize method
+vectfunc = np.vectorize(myfunc,otypes=[np.float],cache=False)
+print("\nTime taken by vectorization method \n----------------------------------------------\n{} micro seconds".format(1000000*(t2-t1)))

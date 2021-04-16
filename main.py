@@ -65,9 +65,8 @@ def vect(input_filename,output_filename):
 	#get starts and ends of loops and if blocks
 	start_loop,end_loop,start_if,end_if = Parsing(input_file) 
 	print(start_loop,end_loop,start_if,end_if)
-
-	#For loop Vectorization
-	code = vectorize.vectorized_function()
+	#code = performing vectorization or something 
+	code = np.vectorize(myfunc,otypes=[np.float],cache=False)
 	# write back into a new file! 
 	write(code, output_filename)
 
@@ -93,7 +92,7 @@ def unrolling(input_filename,output_filename):
 
 	toc = time.time()
 	print("\nTime taken to generate optimised code is- "+ str(1000*(toc-tic))+"ms\n")
-	
+
 	#check performance 
 	text = "Loop Unrolling"
 	check_performance(text,input_filename,output_filename)
