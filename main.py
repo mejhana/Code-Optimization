@@ -6,7 +6,7 @@ import os
 
 #Userdefined Functions
 
-from loop_vectorization import *
+#from loop_vectorization import *
 from Loop_Unrolling import *
 from Loop_Tiling import *
 
@@ -26,16 +26,17 @@ def check_performance(text,input_filename,output_filename):
 	tic = time.time()
 	execfile(input_filename)
 	toc = time.time()
-	print("\nTime taken BEFORE " + text +  "- "+ str(1000*(toc-tic))+"ms")
+	print("\nTime taken BEFORE " + text +  "- "+ str(1000*(toc-tic))+"ms\n")
 
 	tic = time.time()
 	execfile(output_filename)
 	toc = time.time()
-	print("\nTime taken AFTER " + text +  "- "+ str(1000*(toc-tic))+"ms")
+	print("\nTime taken AFTER " + text +  "- "+ str(1000*(toc-tic))+"ms\n")
 
 
 def til_loop(input_filename,output_filename):
 	block_size = int(input("\nEnter Block Size - "))
+	tic = time.time()
 	#reading the file to optimise
 	input_file = read(input_filename)
 
@@ -48,27 +49,36 @@ def til_loop(input_filename,output_filename):
 	# write back into a new file! 
 	write(code, output_filename)
 
+	toc =  time.time()
+	print("\nTime taken to generate optimised code is- "+ str(1000*(toc-tic))+"ms\n")
+
 	#check performance 
 	text = "Loop Tiling"
 	check_performance(text,input_filename,output_filename)
 
 def vect(input_filename,output_filename):
+	tic = time.time()
 	#reading the file to optimise
 	input_file = read(input_filename)
 
 	#get starts and ends of loops and if blocks
 	start_loop,end_loop,start_if,end_if = Parsing(input_file) 
 	print(start_loop,end_loop,start_if,end_if)
-	#code = performing vectorization or something 
+
+	# for loop Vectorization
 	code = np.vectorize(myfunc,otypes=[np.float],cache=False)
 	# write back into a new file! 
 	write(code, output_filename)
+
+	toc = time.time()
+	print("\nTime taken to generate optimised code is- "+ str(1000*(toc-tic))+"ms\n")
+
 	#check performance 
 	text = "Loop Vectorization"
 	check_performance(text,input_filename,output_filename)
 	
 def unrolling(input_filename,output_filename):
-	print("Shreya do this lol")
+	tic = time.time()
 	#reading the file to optimise
 	input_file = read(input_filename)
 
@@ -80,6 +90,9 @@ def unrolling(input_filename,output_filename):
 	# write back into a new file! 
 	#write(code, output_filename)
 
+	toc = time.time()
+	print("\nTime taken to generate optimised code is- "+ str(1000*(toc-tic))+"ms\n")
+
 	#check performance 
 	text = "Loop Unrolling"
 	check_performance(text,input_filename,output_filename)
@@ -89,12 +102,18 @@ def main():
 	if choice == 1:
 		input_filename = "sample_inputs\sample_tiling.py"
 		output_filename = "sample_outputs\output_loop_tiling.py"
+		#removing comments! 
+		code =  remove_comments(input_filename)
+		write(code, input_filename)
 		print("Performing Loop Tilling")
 		til_loop(input_filename,output_filename)
 	elif choice == 2:
 		#vectorization
 		input_filename = "sample_inputs\sample_vector.py"
 		output_filename = "sample_outputs\output_loop_vectorization.py"
+		#removing comments! 
+		code =  remove_comments(input_filename)
+		write(code, input_filename)
 		print("Performing vectorization")
 		vect(input_filename,output_filename)
 		
@@ -102,8 +121,12 @@ def main():
 		#Loop Unrolling
 		input_filename = "sample_inputs\sample_unroll.py"
 		output_filename = "sample_outputs\output_loop_unroll.py"
+		#removing comments! 
+		code =  remove_comments(input_filename)
+		write(code, input_filename)
 		print("Performing Loop Unrolling")
 		unrolling(input_filename,output_filename)
+	
 
 
 

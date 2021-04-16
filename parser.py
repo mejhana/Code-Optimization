@@ -1,4 +1,6 @@
 import re
+import tokenize
+from io import StringIO
 
 def replace_var(line, new_var, old_var):
 	sep = re.split(r'(\[|\]|\(|\)|;|,|\s)\s*', line)
@@ -13,7 +15,7 @@ def tag_words(word):
 	identifier = re.compile(r"^[^\d\W]\w*\Z", re.UNICODE)
 	digits = re.compile(r"([0-9]+(?:\.[0-9]+)?)")
 	tag = ""
-	keywords = ["for", "in", "range" ,"while" ,"if", "elif" ,"else","continue","break"]
+	keywords = ["for", "in", "range" ,"while" ,"if", "elif" ,"else","continue","break","print"]
 	if word in keywords:
 		tag = "keyword"
 	elif re.match(identifier, word):   
@@ -85,3 +87,15 @@ def Parsing(file):
 		end_loop.append(line_number)			
 
 	return start_loop,end_loop,start_if,end_if
+
+def remove_comments(file_name):
+	fileObj = open(file_name, 'r')
+	code = list(open(file_name, 'r'))
+	for toktype, tok, start, end, line in tokenize.generate_tokens(fileObj.readline):
+		if toktype == tokenize.COMMENT:
+			print('COMMENT' + " " + tok)
+			print(line)
+			code[code.index(line)] = ""
+	return(code)
+
+

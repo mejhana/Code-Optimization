@@ -1,26 +1,27 @@
-
-A = [[12, 7, 3],
-    [4, 5, 6],
-    [7, 8, 9]]
-
-B = [[5, 8, 1, 2],
-    [6, 7, 3, 0],
-    [4, 5, 9, 1]]
+A = [[12, 72, 53 ,15],
+    [84, 52, 69 , 14],
+    [71, 18, 79, 89]]
+B = [[50, 86, 11, 27],
+    [62, 87, 33, 90],
+    [44, 50, 95, 11]]
+C = [[8, 6, 1, 7],
+    [2, 7, 3, 9],
+    [4, 0, 9, 1]]
     
 result = [[0, 0, 0, 0],
         [0, 0, 0, 0],
         [0, 0, 0, 0]]
 
-x = len(A)
-y = len(B[0])
-z = len(B)
+Len_A = len(A)
+Len_B = len(B[0])
+Len_C = len(B)
 
-for i in range(0,2,x): 
-    for j in range(0,2,y): 
-        for k in range(0,2,z): 
-            for var17 in range(i,min(x,x+2)): 
-                for var18 in range(j,min(y,y+2)): 
-                    for var19 in range(k,min(z,z+2)): 
-                        result[var17][var18] += A[var17][var19] * B[var19][var18]
+for one in range(0,2+2,Len_A):
+    for two in range(0,3+2,Len_B):
+        for three in range(0,1+2,Len_C):
+            for var18 in range(one,2,min(Len_A,Len_A+2)):
+                for var19 in range(two,3,min(Len_B,Len_B+2)):
+                    for var20 in range(three,1,min(Len_C,Len_C+2)):
+                        result[var18][var19] += A[var18][var20] * B[var20][var19] + C[var20][var19]
 
 print(result)
