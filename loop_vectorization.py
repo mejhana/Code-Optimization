@@ -36,4 +36,4 @@ print(time.time()*1000000)
 print("micro seconds")
 # Numpy.vectorize method
 vectfunc = np.vectorize(myfunc,otypes=[np.float],cache=False)
-print("\nTime taken by vectorization method \n----------------------------------------------\n{} micro seconds".format(1000000*(t2-t1)))
+print("\nTime taken by vectorization method\n----------------------------------------------\n{} micro seconds".format(1000000*(t2-t1)))
