@@ -1,22 +1,26 @@
 
-A = [[12, 7, 3],
-    [4, 5, 6],
-    [7, 8, 9]]
+A = [[12, 72, 53 ,15],
+    [84, 52, 69 , 14],
+    [71, 18, 79, 89]]
 
-B = [[5, 8, 1, 2],
-    [6, 7, 3, 0],
-    [4, 5, 9, 1]]
+B = [[50, 86, 11, 27],
+    [62, 87, 33, 90],
+    [44, 50, 95, 11]]
+
+C = [[8, 6, 1, 7],
+    [2, 7, 3, 9],
+    [4, 0, 9, 1]]
     
 result = [[0, 0, 0, 0],
         [0, 0, 0, 0],
         [0, 0, 0, 0]]
 
-x = len(A)
-y = len(B[0])
-z = len(B)
+Len_A = len(A)
+Len_B = len(B[0])
+Len_C = len(B)
 
-for i in range(0,x):
-    for j in range(0,y):
-        for k in range(0,z):
-            result[i][j] += A[i][k] * B[k][j]
+for one in range(0,2,Len_A):
+    for two in range(0,3,Len_B):
+        for three in range(0,1,Len_C):
+            result[one][two] += A[one][three] * B[three][two] + C[three][two]
 print(result)

@@ -14,7 +14,7 @@ def loop_tilling(line,block_size,new_var):
 		mid = str(variables[2]) + "+" + str(block_size)
 		last = "min(" + str(variables[3]) + "," + str(variables[3]) + "+" + str(block_size) + ")"
 		new_loop = "for " + str(variables[0]) + " in range(" + str(variables[1] + "," + mid  + "," + str(variables[3]) + "):\n") 
-		daughter_loop =  "for " + new_var + " in range(" + str(variables[0] + "," + str(variables[2]) + "," + last + "): + \n") 
+		daughter_loop =  "for " + new_var + " in range(" + str(variables[0] + "," + str(variables[2]) + "," + last + "):\n") 
 	elif len(variables) == 3:
 		last = "min(" + str(variables[2]) + "," + str(variables[2]) + "+" + str(block_size) + ")"
 		new_loop = "for " + str(variables[0]) + " in range(" + str(variables[1] + "," + str(block_size)+ "," + str(variables[2]) + "): \n")
