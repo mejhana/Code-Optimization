@@ -36,9 +36,8 @@ def check_performance(text,input_filename,output_filename):
 
 def til_loop(input_filename,output_filename):
 	block_size = int(input("\nEnter Block Size - "))
-	#reading the file to optimise
-	
 	tic = time.time()
+	#reading the file to optimise
 	input_file = read(input_filename)
 
 	#get starts and ends of loops and if blocks
@@ -65,7 +64,8 @@ def vect(input_filename,output_filename):
 	#get starts and ends of loops and if blocks
 	start_loop,end_loop,start_if,end_if = Parsing(input_file) 
 	print(start_loop,end_loop,start_if,end_if)
-	#code = performing vectorization or something 
+
+	# for loop Vectorization
 	code = np.vectorize(myfunc,otypes=[np.float],cache=False)
 	# write back into a new file! 
 	write(code, output_filename)
