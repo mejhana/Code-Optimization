@@ -6,7 +6,7 @@ import os
 
 #Userdefined Functions
 
-from loop_vectorization import *
+#from loop_vectorization import *
 from Loop_Unrolling import *
 from Loop_Tiling import *
 
@@ -102,6 +102,9 @@ def main():
 	if choice == 1:
 		input_filename = "sample_inputs\sample_tiling.py"
 		output_filename = "sample_outputs\output_loop_tiling.py"
+		#removing comments! 
+		code =  remove_comments(input_filename)
+		write(code, input_filename)
 		print("Performing Loop Tilling")
 		til_loop(input_filename,output_filename)
 	elif choice == 2:
@@ -117,6 +120,7 @@ def main():
 		output_filename = "sample_outputs\output_loop_unroll.py"
 		print("Performing Loop Unrolling")
 		unrolling(input_filename,output_filename)
+	
 
 
 
