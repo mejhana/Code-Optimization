@@ -111,6 +111,9 @@ def main():
 		#vectorization
 		input_filename = "sample_inputs\sample_vector.py"
 		output_filename = "sample_outputs\output_loop_vectorization.py"
+		#removing comments! 
+		code =  remove_comments(input_filename)
+		write(code, input_filename)
 		print("Performing vectorization")
 		vect(input_filename,output_filename)
 		
@@ -118,6 +121,9 @@ def main():
 		#Loop Unrolling
 		input_filename = "sample_inputs\sample_unroll.py"
 		output_filename = "sample_outputs\output_loop_unroll.py"
+		#removing comments! 
+		code =  remove_comments(input_filename)
+		write(code, input_filename)
 		print("Performing Loop Unrolling")
 		unrolling(input_filename,output_filename)
 	
