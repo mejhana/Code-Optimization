@@ -31,8 +31,9 @@ for i in range(len(lst_x)):
     else:
         lst_result.append(sn(y+x))
 t2=time.time()
-print("\nTime taken by for-loop\n----------------------------------------------\n{} us".format(1000000*(t2-t1)))
+print("\nTime taken by for loop method\n---------------------------------------\n")
+print(time.time()*1000000) 
+print("micro seconds")
 # Numpy.vectorize method
-print("\nTime taken by numpy.vectorize method\n"+'-'*40)
 vectfunc = np.vectorize(myfunc,otypes=[np.float],cache=False)
-time().list(vectfunc(lst_x,lst_y))
+print("\nTime taken by for-loop\n----------------------------------------------\n{} micro seconds".format(1000000*(t2-t1)))
