@@ -13,7 +13,7 @@ def tag_words(word):
 	identifier = re.compile(r"^[^\d\W]\w*\Z", re.UNICODE)
 	digits = re.compile(r"([0-9]+(?:\.[0-9]+)?)")
 	tag = ""
-	keywords = ["for", "in", "range" ,"while" ,"if", "elif" ,"else","continue","break"]
+	keywords = ["for", "in", "range" ,"while" ,"if", "elif" ,"else","continue","break","print"]
 	if word in keywords:
 		tag = "keyword"
 	elif re.match(identifier, word):   
