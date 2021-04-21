@@ -2,8 +2,13 @@ import re
 import tokenize
 from io import StringIO
 
+def scan(line):
+	words = re.split(r'(\[|\]|\(|\)|;|,|\s)\s*', line)
+	return words
+
+
 def replace_var(line, new_var, old_var):
-	sep = re.split(r'(\[|\]|\(|\)|;|,|\s)\s*', line)
+	sep = scan(line)
 	var = get_var(sep)
 	for v in var:
 		for n,o in zip(new_var,old_var):
@@ -50,7 +55,7 @@ def Parsing(file):
 	
 	for line in file:
 		if line.startswith(tabs):
-			for word in re.split(r'(\[|\]|\(|\)|;|,|\s)\s*', line):
+			for word in scan(line):
 				#increment line number with each line
 				if word in loop_keyword:
 					start_loop.append(line_number)
@@ -93,8 +98,6 @@ def remove_comments(file_name):
 	code = list(open(file_name, 'r'))
 	for toktype, tok, start, end, line in tokenize.generate_tokens(fileObj.readline):
 		if toktype == tokenize.COMMENT:
-			print('COMMENT' + " " + tok)
-			print(line)
 			code[code.index(line)] = ""
 	return(code)
 
