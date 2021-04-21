@@ -54,8 +54,8 @@ def til_loop(input_filename,output_filename):
 	check_performance(text,input_filename,output_filename)
 
 def main():
-	input_filename = "sample_inputs\sample_tiling.py"
-	output_filename = "sample_outputs\output_loop_tiling.py"
+	input_filename = "sample_tiling.py"
+	output_filename = "output_loop_tiling.py"
 	#removing comments! 
 	code =  remove_comments(input_filename)
 	write(code, input_filename)
