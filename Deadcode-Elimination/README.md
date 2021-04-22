@@ -1,8 +1,6 @@
-# Deadcode-Removal-Complier
-System Programming Academic Project
-
-This compiler, like an IDE, keeps track of all the variables in a particular piece of code and checks if they were initialized properly or initialized but not used.
-Once compiled, it returns all the flags set and tells the user about the uninitialized or unused variables.
-This helps the user write an error free, memory optimum code.
-
-Used bison, lex and yacc packages to complete the project.
+# Deadcode-Removal 
+Implemented using lex and yacc 
+The code has two parts. A lex and a yacc code. 
+The lex code specializes the tokens to be recognized in the code. 
+The yacc code specifies the syntax.
+The embedded c code used to check which variables have been declared and which of them have never been used after declaring them.
