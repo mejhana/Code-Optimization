@@ -1,31 +1,30 @@
-A = [[12, 72, 53 ,15],
-    [84, 52, 69 , 14],
-    [71, 18, 79, 89]]
-B = [[50, 86, 11, 27],
-    [62, 87, 33, 90],
-    [44, 50, 95, 11]]
+import numpy as np
+A = np.random.randint(1000, size=(1000, 1000))
+B = np.random.randint(1000, size=(1000, 1000))
+C = np.random.randint(1000, size=(1000, 1000))
 
-'''mu
-li
-ty
-line
-com
-emt'''
+# A = [[12, 72, 53],
+#     [84, 52, 69 ],
+#     [71, 18, 79]]
 
-C = [[8, 6, 1, 7],
-    [2, 7, 3, 9],
-    [4, 0, 9, 1]]
+# B = [[50, 86, 11],
+#     [62, 87, 33],
+#     [44, 50, 95]]
+
     
-result = [[0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0]]
+# result = [[0, 0, 0],
+#         [0, 0, 0],
+#         [0, 0, 0]]
 
-Len_A = len(A)
-Len_B = len(B[0])
-Len_C = len(B)
+x = len(A)
+y = len(B)
+z = 3
 
-for one in range(0,2,Len_A):
-    for two in range(0,3,Len_B):
-        for three in range(0,1,Len_C):
-            result[one][two] += A[one][three] * B[three][two] + C[three][two]
+
+result = np.zeros([1000,1000])
+
+for i in range(0,x):
+    for j in range(0,y):
+        for k in range(0,z):
+            result[i][j] += A[i][k] * B[k][j]
 print(result)
