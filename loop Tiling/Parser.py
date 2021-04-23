@@ -2,23 +2,14 @@ import re
 import tokenize
 from io import StringIO
 
+identifier = re.compile(r"^[^\d\W]\w*\Z", re.UNICODE)
+digits = re.compile(r"([0-9]+(?:\.[0-9]+)?)")
+
 def scan(line):
 	words = re.split(r'(\[|\]|\(|\)|;|,|\s)\s*', line)
 	return words
 
-
-def replace_var(line, new_var, old_var):
-	sep = scan(line)
-	var = get_var(sep)
-	for v in var:
-		for n,o in zip(new_var,old_var):
-			if v == o:
-				line = line.replace(v,n)
-	return line
-
-def tag_words(word):
-	identifier = re.compile(r"^[^\d\W]\w*\Z", re.UNICODE)
-	digits = re.compile(r"([0-9]+(?:\.[0-9]+)?)")
+def tag_words(word):	
 	tag = ""
 	keywords = ["for", "in", "range" ,"while" ,"if", "elif" ,"else","continue","break","print"]
 	if word in keywords:
@@ -38,7 +29,16 @@ def get_var(line):
 			var.append(word)
 	return var
 
-def Parsing(file):
+def replace_var(line, new_var, old_var):
+	sep = scan(line)
+	var = get_var(sep)
+	for v in var:
+		for n,o in zip(new_var,old_var):
+			if v == o:
+				line = line.replace(v,n)
+	return line
+
+def get_line_numbers(file):
 	loop_keyword = ["for", "while"]
 	ifs_keyword = ["if", "elif" ,"else"]
 	in_loop = False
@@ -73,8 +73,7 @@ def Parsing(file):
 			tabs.replace('  ', '')
 			if all_starts[block-1] in loop_keyword:
 				end_loop.append(line_number)
-				block -=1	
-						
+				block -=1				
 			else:
 				end_if.append(line_number)	
 				block -=1

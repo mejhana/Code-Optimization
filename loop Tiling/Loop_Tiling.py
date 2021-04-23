@@ -21,16 +21,28 @@ def loop_tilling(line,block_size,new_var):
 		daughter_loop =  "for " + new_var + " in range(" + str(variables[0] + "," + last + "): \n") 
 	return new_loop,daughter_loop
 
-def perform_loop_tilling(sample_file, start_loop,end_loop, block_size):
+def perform_loop_tilling(sample_file, start_loop,end_loop,start_if,end_if, block_size):
 	code = list(sample_file)
 	daughter_loops = []
 	new_var = []
 	old_var = []
+	extra_tabs=""
 	for i in range(len(start_loop)):
 		index = start_loop[i]
-		old_line = "".join(sample_file[index])
+		loop_line = sample_file[index]
+		if not("for" in loop_line):
+			extra_tabs += "    "
+			continue
+
+		# for j in range(start_if):
+		# 	if j in range(start_loop[i],end_loop[i]):
+		# 		extra_tabs += "    "
+		# 	else:
+		# 		continue
+
+		old_line = "".join(loop_line)
 		#splitting each line into words
-		line  = re.split(r'(\[|\]|\(|\)|;|,|\s)\s*',  old_line)
+		line  = scan(old_line)
 		var = get_var(line)
 		old_var.append(var[0])
 		new_var.append("var" + str(index))
@@ -40,13 +52,13 @@ def perform_loop_tilling(sample_file, start_loop,end_loop, block_size):
 		if i == 0:
 			tabs = ""
 		#changing loop
-		code[index] = tabs + new_loop
+		code[index] = tabs + extra_tabs+ new_loop
 		block_index = index
 		if i == (len(start_loop) -1 ): #inner most loop, add daughter loops 
 			daughter_loops.reverse()
 			for j in range(len(daughter_loops)):
 				daughter_tabs = "    "*(len(daughter_loops) - j) + "    "
-				code.insert(index+1, "    " + daughter_tabs + daughter_loops[j])
+				code.insert(index+1, "    " + daughter_tabs + str(extra_tabs) + daughter_loops[j])
 				block_index += 1
 			
 			# get block of code within inner most loop !

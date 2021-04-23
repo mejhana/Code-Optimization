@@ -1,30 +1,15 @@
 import numpy as np
-A = np.random.randint(1000, size=(1000, 1000))
-B = np.random.randint(1000, size=(1000, 1000))
-C = np.random.randint(1000, size=(1000, 1000))
-
-# A = [[12, 72, 53],
-#     [84, 52, 69 ],
-#     [71, 18, 79]]
-
-# B = [[50, 86, 11],
-#     [62, 87, 33],
-#     [44, 50, 95]]
-
-    
-# result = [[0, 0, 0],
-#         [0, 0, 0],
-#         [0, 0, 0]]
-
-x = len(A)
-y = len(B)
-z = 3
+A = np.random.randint(1000, size=(100, 100))
+B = np.random.randint(1000, size=(100, 100))
+C = np.random.randint(1000, size=(100, 100))
 
 
-result = np.zeros([1000,1000])
+Len_A = len(A)
+Len_B = len(B)
+Len_C = len(A)
 
-for i in range(0,x):
-    for j in range(0,y):
-        for k in range(0,z):
-            result[i][j] += A[i][k] * B[k][j]
-print(result)
+result = np.zeros([100,100])
+for one in range(0,2,Len_A):
+    for two in range(0,2,Len_B):
+        for three in range(0,2,Len_C):
+            result[one][two] += A[one][three] * B[three][two] + C[three][two]
