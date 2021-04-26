@@ -2,10 +2,9 @@ import matplotlib.pyplot as plt
 #from subprocess import call
 import numpy as np
 import time 
-import re 
 import os
 
-#Userdefined Functions
+#Userdefined Function
 from Loop_Tiling import *
 
 def read(filename):
@@ -68,7 +67,7 @@ def plotting(input_filename,output_filename):
 	plt.title('Time vs Block size')
 	plt.legend()
 	plt.show()
-
+	
 def main():
 	input_filename = "sample_tiling.py"
 	output_filename = "output_loop_tiling.py"
@@ -80,7 +79,7 @@ def main():
 	print("\nTime taken BEFORE " + "Loop Tiling" +  "- "+ str(time_before)+ "\n")
 	print("\nTime taken AFTER " + "Loop Tiling" +  "- "+ str(time_after)+ "\n")
 	
-	#plotting(input_filename,output_filename)
+	plotting(input_filename,output_filename)
 		
 if __name__ == "__main__":
     main()

@@ -1,7 +1,4 @@
 import re
-import tokenize
-from io import StringIO
-
 identifier = re.compile(r"^[^\d\W]\w*\Z", re.UNICODE)
 digits = re.compile(r"([0-9]+(?:\.[0-9]+)?)")
 
@@ -92,6 +89,7 @@ def get_line_numbers(file):
 
 	return start_loop,end_loop,start_if,end_if
 
+import tokenize
 def remove_comments(file_name):
 	fileObj = open(file_name, 'r')
 	code = list(open(file_name, 'r'))

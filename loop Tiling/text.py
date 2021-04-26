@@ -23,3 +23,12 @@ C = np.random.randint(1000, size=(100, 100))
 x = len(A)
 y = len(B)
 z = len(A)
+
+def sum_elems(l):
+    acc=0
+    i=0
+    n=len(l)
+    while i<n:
+        acc+=l[i]
+        i+=l
+
